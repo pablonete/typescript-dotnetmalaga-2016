@@ -1,3 +1,6 @@
+// Generics: Not much new from what you'd expect coming from C# or Java
+
+// Javascript objects are already dictionaries.
 interface DictionaryStringTo<T> {
     [key: string]: T;
 }
