@@ -15,6 +15,7 @@ function incrementOptional(value?: number): number {
 
 console.log(incrementOptional(1));
 console.log(incrementOptional());
+// Argument accept undefined because it's optional
 console.log(incrementOptional(undefined));
 // Compiler errors:
 // console.log(incrementOptional(null));
@@ -40,3 +41,20 @@ function getError(): Error {
 //  return; // Compiler error, undefined not assignable to Error in strict null mode
 //  return null; // Compiler error
 }
+
+// Don't confuse optional with nullable
+interface WithOptional {
+  maybe?: string;
+}
+
+// Property may or may not be present
+const a: WithOptional = {};
+
+interface WithNullable {
+  maybe: string | null;
+}
+
+// Property must be present, but can be string or null
+const b: WithNullable = { maybe: null };
+
+// Same applies to function arguments
