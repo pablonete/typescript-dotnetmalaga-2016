@@ -61,3 +61,22 @@ showError(warning);
 // Two modules can define their own types with same structure.
 // Instances will match both interfaces without further declaration.
 // If any of them changes, compiler will detect wrong usages.
+
+// Readonly interfaces / classes
+interface NameReadOnly {
+  readonly name: string;
+}
+
+const nameReadOnly: NameReadOnly = warning;
+// nameReadOnly.name = "new"; // Compiler error: this type doesn't allow changing the name
+// Note the instance is not immutable, only the type
+// Soon: ReadOnly<T>. Recursive?
+
+interface WithOptional {
+  name: string;
+  maybe?: string;
+}
+
+const withOptional: WithOptional = warning;
+withOptional.maybe === undefined;
+"maybe" in withOptional === false;
