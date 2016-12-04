@@ -42,6 +42,13 @@ function getError(): Error {
 //  return null; // Compiler error
 }
 
+function definiteAssignmentAnalysis() {
+  let n: number;
+  // console.log(n); // Compiler error: n doesn't support default undefined. 
+  n = 3;
+  console.log(n); // Valid usage because n is initialized
+}
+
 // Don't confuse optional with nullable
 interface WithOptional {
   maybe?: string;
