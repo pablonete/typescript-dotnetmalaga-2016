@@ -22,7 +22,21 @@ function getNotifications(type: NotificationLiteralType) {
 
 }
 
-getNotifications("info");
+function useNewTypes() {
+    getNotifications("info");
 
-// Compile error
-// getNotifications("wrong");
+    // Compile error
+    // getNotifications("wrong");
+
+    // If we have a string, we need to validate it
+    let a: string = "any";
+
+    // Compiler error: this string might be an invalid type
+    // getNotifications(a);
+
+    if (a === "info") {
+        // Variable type is narrowed here, so we can use it safely
+        getNotifications(a);
+    }
+}
+
