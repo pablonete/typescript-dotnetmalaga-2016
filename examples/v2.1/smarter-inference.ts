@@ -4,42 +4,59 @@
 // Change setting in VSCode: https://code.visualstudio.com/docs/languages/typescript#_using-newer-typescript-versions
 // Verify TS version in VSCode statusbar
 
-// This won't be inferred as `any` anymore
-// So this is not an error for no-implicit-any since 2.1
-let count;
+function lessImplicitAnyErrors() {
+    // This won't be inferred as `any` anymore
+    // So this is not an error for no-implicit-any since 2.1
+    let count;
 
-count = 10;
-// Now count: number
+    count = 10;
+    // Now count: number
 
-count++;
-// Correct
+    count++;
+    // Correct
 
-count = "many";
-// Now count: string
+    count = "many";
+    // Now count: string
 
-// So this compiles:
-console.log(count.length);
+    // So this compiles:
+    console.log(count.length);
 
-// Compiler error
-// count++;
-
-const notifications = [];
-
-notifications.push(new Error("any"));
-// Now notifications: Notification[]
-for (let n of notifications) {
-    console.log(n.message);
+    // Compiler error
+    // count++;
 }
 
-notifications.push({ a: 1 });
-// Now notifications: (Error | { a: number })[]
+function alsoForArrays() {
+    const notifications = [];
 
-for (let n of notifications) {
-    if (n instanceof Error) {
+    notifications.push(new Error("any"));
+    // Now notifications: Notification[]
+    for (let n of notifications) {
         console.log(n.message);
-    } else {
-        console.log(n.a);
     }
+
+    notifications.push({ a: 1 });
+    // Now notifications: (Error | { a: number })[]
+
+    for (let n of notifications) {
+        if (n instanceof Error) {
+            console.log(n.message);
+        } else {
+            console.log(n.a);
+        }
+    }
+}
+
+function typeIsFrozenWhenAssigned() {
+    let x = [];
+    x.push(5);
+
+    // Here y takes current x type
+    let y = x;
+
+    x.push("hello");
+
+    // Compiler error, because y is frozen, not evolving like x
+    // y.push("hello");
 }
 
 // It doesn't work for arguments.
