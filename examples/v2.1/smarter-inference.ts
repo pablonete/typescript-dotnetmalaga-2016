@@ -18,7 +18,53 @@ count = "many";
 // Now count: string
 
 // So this compiles:
-count.length;
+console.log(count.length);
 
 // Compiler error
 // count++;
+
+const notifications = [];
+
+notifications.push(new Error("any"));
+// Now notifications: Notification[]
+for (let n of notifications) {
+    console.log(n.message);
+}
+
+notifications.push({ a: 1 });
+// Now notifications: (Error | { a: number })[]
+
+for (let n of notifications) {
+    if (n instanceof Error) {
+        console.log(n.message);
+    } else {
+        console.log(n.a);
+    }
+}
+
+// It doesn't work for arguments.
+// Compile error
+// function coerceString(value) {
+//     value = value ? value.toString() : "";
+//     return value;
+// }
+
+// My take on this: it's useful to ramp up existing Javascript codebase;
+// and to turn on noImplicitAny flag easier (less errors);
+// mutability is not very recommended for readable code;
+// but it has some nice use cases.
+
+function deferAssignment(a: number, b: number) {
+    let hasToFetch;
+    if (a === b) {
+        hasToFetch = false;
+    } else if (a > b) {
+        console.log("do something");
+        hasToFetch = b > 20;
+    }
+
+    // But there's a maybe-unintentional undefined here that an explicit type would catch in TS 2.1
+    if (hasToFetch) {
+        console.log("fetch");
+    }
+}
