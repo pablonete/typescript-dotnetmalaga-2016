@@ -1,0 +1,15 @@
+{
+  "name": "typescript-dotnetmalaga-2016",
+  "version": "1.0.0",
+  "description": "Slides of my session in dotnetmalaga 2016.",
+  "readme": "Slides of my session in dotnetmalaga 2016.",
+  "devDependencies": {
+    "typescript": "^2.1.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pablonete/typescript-dotnetmalaga-2016.git"
+  },
+  "author": "Pablo Núñez",
+  "license": "ISC"
+}
