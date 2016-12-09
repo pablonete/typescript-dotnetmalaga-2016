@@ -14,12 +14,15 @@ function avoidSillyComparisons() {
     // But let variables get the "widened literal type", so they accept any number 
     let n = 1;
     n = 2;
+
+    if (n === 1) {
+    }
 }
 
 // General suggestion: consider using strongly-typed literals instead of enums
 type NotificationLiteralType = "info" | "warning" | "error";
-function getNotifications(type: NotificationLiteralType) {
 
+function getNotifications(type: NotificationLiteralType) {
 }
 
 function useNewTypes() {
@@ -29,7 +32,7 @@ function useNewTypes() {
     // getNotifications("wrong");
 
     // If we have a string, we need to validate it
-    let a: string = "any";
+    let a = "any";
 
     // Compiler error: this string might be an invalid type
     // getNotifications(a);

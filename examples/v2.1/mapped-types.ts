@@ -5,6 +5,8 @@ function demoReadOnly(notification: Readonly<Notification>) {
 
     // Compiler error
     // notification.message = "changed";
+
+    // No recursion, so only first level properties are affected.
 }
 
 function demoPartial() {
@@ -44,6 +46,7 @@ interface Person {
     age: number;
     city: string;
     zip: string;
+    notification: Notification;
 }
 
 function demoRecord() {
@@ -51,7 +54,12 @@ function demoRecord() {
         name: [],
         age: [new Error("must be a number")],
         city: [new Error("unknown")],
-        zip: [new Error("must be numeric"), new Error("must be exactly 5 length"), new Error("contains leading spaces")]
+        zip: [
+            new Error("must be numeric"),
+            new Error("must be exactly 5 length"),
+            new Error("contains leading spaces"),
+        ],
+        notification: [],
     };
 
     const person = {} as Person;
@@ -64,9 +72,14 @@ function demoRecord() {
 
 // These 4 new generic types are built upon the new mapped types:
 // https://github.com/Microsoft/TypeScript/blob/fb23e6dba1e79c2c13f116299756062ee36cbf09/lib/lib.d.ts#L1366-L1392
-type MyReadonly<T> = {
-    readonly [P in keyof T]: T[P];
+type DeepReadonly<T> = {
+    readonly [P in keyof T]: DeepReadonly<T[P]>;
 };
+
+const person = {} as DeepReadonly<Person>;
+// person.city = "hola";
+// person.notification.message = "hola";
+
 // This uses 3 new concepts:
 // 1. keyof
 // 2. indexed access types T[P]

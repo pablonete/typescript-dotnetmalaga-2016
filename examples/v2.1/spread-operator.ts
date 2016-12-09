@@ -25,9 +25,9 @@ function restProperties() {
 }
 
 function restInArrayArgument([ head, ...tail ]: number[]) {
-
+    return [...tail, head, ...tail];
 }
 
 function restInObjectArgument({ name, ...error }: Notification) {
-
+    return { name, error };
 }

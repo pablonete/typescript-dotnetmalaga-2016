@@ -1,9 +1,3 @@
-// For this example, you need TC 2.1 (@next)
-// `npm i --save-dev typescript@rc`
-// It yields 2.1.1 as of today
-// Change setting in VSCode: https://code.visualstudio.com/docs/languages/typescript#_using-newer-typescript-versions
-// Verify TS version in VSCode statusbar
-
 function lessImplicitAnyErrors() {
     // This won't be inferred as `any` anymore
     // So this is not an error for no-implicit-any since 2.1
@@ -23,6 +17,9 @@ function lessImplicitAnyErrors() {
 
     // Compiler error
     // count++;
+
+    // If you use explicit any, this inference won't work
+    // i.e. it compiles, but no types are verified
 }
 
 function alsoForArrays() {
@@ -69,7 +66,7 @@ function typeIsFrozenWhenAssigned() {
 // My take on this: it's useful to ramp up existing Javascript codebase;
 // and to turn on noImplicitAny flag easier (less errors);
 // mutability is not very recommended for readable code;
-// but it has some nice use cases.
+// but it has some use cases.
 
 function deferAssignment(a: number, b: number) {
     let hasToFetch;
