@@ -12,12 +12,12 @@ interface DictionaryNumberTo<T> {
 // Don't rely too much on type inference.
 // It's powerful, but on an error you'll need to track down more.
 const resultsMap = {
-// const map: DictionaryStringTo<Notification> = {
-  "bad": { name: "Fail", message: "Wrong", type: NotificationType.failure },
-  "good": { name: "Saved", messsage: "Succeed", type: NotificationType.info },
+// const resultsMap: DictionaryStringTo<Notification> = {
+  bad: { name: "Fail", message: "Wrong", type: NotificationType.failure },
+  good: { name: "Saved", messsage: "Succeed", type: NotificationType.info },
 }
 
-console.log(resultsMap["good"]);
+console.log(resultsMap["good"].message);
 
 // More advanced usages with Map (like objects as keys)
 // but you need to target ES6 and perhaps provide a polyfill
