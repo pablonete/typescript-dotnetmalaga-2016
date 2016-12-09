@@ -84,19 +84,3 @@ const nameOptional: NameOptional = warning;
 nameOptional.maybe === undefined;
 // This actually checks the property exists
 "maybe" in nameOptional === false;
-
-// Same for function arguments
-function demoOptional(name: string, maybe?: string) {
-}
-
-// Compiler error
-// demoOptional();
-
-demoOptional(undefined);
-
-demoOptional(undefined, undefined);
-
-// Structure vs content
-
-// Now enable strictNullChecks (by removing local tsconfig.json)
-// and check types of maybe in previous examples: `string | undefined`

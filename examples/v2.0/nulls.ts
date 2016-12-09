@@ -15,7 +15,7 @@ function incrementOptional(value?: number): number {
 
 console.log(incrementOptional(1));
 console.log(incrementOptional());
-// Argument accept undefined because it's optional
+// Argument accept undefined because it's optional (see actual type)
 console.log(incrementOptional(undefined));
 // Compiler errors:
 // console.log(incrementOptional(null));
@@ -56,6 +56,10 @@ interface WithOptional {
 
 // Property may or may not be present
 const a: WithOptional = {};
+// but if it is, it cannot be null.
+const a2: WithOptional = { maybe: "here" };
+// It can be undefined, necessary to model ECMAscript actual behavior:
+const a3: WithOptional = { maybe: undefined };
 
 interface WithNullable {
   maybe: string | null;
@@ -64,4 +68,15 @@ interface WithNullable {
 // Property must be present, but can be string or null
 const b: WithNullable = { maybe: null };
 
-// Same applies to function arguments
+// Same for function arguments
+function demoOptional(name: string, maybe?: string) {
+}
+
+// Compiler error
+// demoOptional();
+
+demoOptional("required");
+
+demoOptional("required", undefined);
+
+// Structure vs content
