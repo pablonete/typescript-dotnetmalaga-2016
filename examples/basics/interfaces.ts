@@ -70,13 +70,33 @@ interface NameReadOnly {
 const nameReadOnly: NameReadOnly = warning;
 // nameReadOnly.name = "new"; // Compiler error: this type doesn't allow changing the name
 // Note the instance is not immutable, only the type
-// Soon: ReadOnly<T>. Recursive?
+// Soon: ReadOnly<T>. Recursive? Stay tunned.
 
-interface WithOptional {
+// Optional properties may be omitted
+// Non-optional properties must exist, although they can contain null or undefined
+interface NameOptional {
   name: string;
   maybe?: string;
 }
 
-const withOptional: WithOptional = warning;
-withOptional.maybe === undefined;
-"maybe" in withOptional === false;
+const nameOptional: NameOptional = warning;
+// This equals is the same the prop doesn't exist or exists with undefined
+nameOptional.maybe === undefined;
+// This actually checks the property exists
+"maybe" in nameOptional === false;
+
+// Same for function arguments
+function demoOptional(name: string, maybe?: string) {
+}
+
+// Compiler error
+// demoOptional();
+
+demoOptional(undefined);
+
+demoOptional(undefined, undefined);
+
+// Structure vs content
+
+// Now enable strictNullChecks (by removing local tsconfig.json)
+// and check types of maybe in previous examples: `string | undefined`
