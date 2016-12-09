@@ -21,21 +21,19 @@ function hide(items: VisibilityItem | VisibilityItem[]): void {
   }
 }
 
-interface Egg {};
-
 // Example from https://www.typescriptlang.org/docs/handbook/advanced-types.html
 interface Bird {
   // String literal types: they are string, but only allow one value.
-  // Useful to create discriminating union types
+  // Can be used to discriminate
   type: "bird";
   fly(): void;
-  layEggs(): Egg[];
+  layEggs(): void;
 }
 
 interface Fish {
   type: "fish";
   swim(): void;
-  layEggs(): Egg[];
+  layEggs(): void;
 }
 
 // Type aliases
@@ -70,5 +68,5 @@ function playSwitch(pet: Pet): void {
   }
 }
 
-// More literal types
+// Funny literal types
 type Falsy = "" | 0 | false | null | undefined;
