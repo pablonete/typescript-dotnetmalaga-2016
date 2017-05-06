@@ -28,6 +28,6 @@ function restInArrayArgument([ head, ...tail ]: number[]) {
     return [...tail, head, ...tail];
 }
 
-function restInObjectArgument({ name, ...error }: Notification) {
+function restInObjectArgument({ name, ...error }: MyNotification) {
     return { name, error };
 }

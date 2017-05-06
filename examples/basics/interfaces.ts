@@ -10,7 +10,7 @@ enum NotificationType {
 }
 
 // No need for I prefix. This is a type that can have its own instances.
-interface Notification {
+interface MyNotification {
   name: string;
   message: string;
   type: NotificationType;
@@ -19,12 +19,12 @@ interface Notification {
 const error = { message: "Broken" };
 
 // All required props must be specified.
-// const notification: Notification = error;
+// const notification: MyNotification = error;
 
 // Cast allows to bypass some checks.
-const notification = error as Notification;
+const notification = error as MyNotification;
 
-const info: Notification = {
+const info: MyNotification = {
   name: "Saved",
   message: "Successfully saved",
   type: NotificationType.info,
@@ -33,7 +33,7 @@ const info: Notification = {
 // Cannot provide extra properties in literal objects.
 // This prevents typos (imagine a mispelled optional property).
 // I don't recommend --suppressExcessPropertyErrors to bypass it.
-// const warning: Notification = {
+// const warning: MyNotification = {
 //   message: "Empty",
 //   type: NotificationType.warning,
 //   color: "yellow",
@@ -47,14 +47,14 @@ const withColor = {
 };
 
 // Existing instances can have extra properties.
-const warning = withColor as Notification;
+const warning = withColor as MyNotification;
 
 // Structural typing
 function showError(error: Error) {
   console.log(error);
 }
 
-// Notification has name and message, so it matches Error
+// MyNotification has name and message, so it matches Error
 showError(warning);
 
 // No need for contracts project.

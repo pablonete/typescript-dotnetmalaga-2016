@@ -26,7 +26,7 @@ function alsoForArrays() {
     const notifications = [];
 
     notifications.push(new Error("any"));
-    // Now notifications: Notification[]
+    // Now notifications: MyNotification[]
     for (let n of notifications) {
         console.log(n.message);
     }

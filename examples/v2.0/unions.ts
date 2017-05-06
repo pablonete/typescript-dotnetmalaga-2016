@@ -3,7 +3,7 @@ interface VisibilityItem {
 }
 
 // Intersection type must be both
-function doNothing(notification: Notification & VisibilityItem) {
+function doNothing(notification: MyNotification & VisibilityItem) {
   // You don't need a new name, but instances must match both types
 }
 

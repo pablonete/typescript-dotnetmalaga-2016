@@ -11,9 +11,9 @@ function demoReadOnly(notification: Readonly<Notification>) {
 
 function demoPartial() {
     // Compiler error, missing properties
-    // const notification: Notification = {};
+    // const notification: MyNotification = {};
 
-    let partialNotification: Partial<Notification>;
+    let partialNotification: Partial<MyNotification>;
     partialNotification = {};
     partialNotification = { name: "any" };
     partialNotification = { name: "any", message: "any" };
@@ -26,7 +26,7 @@ function demoPartial() {
 
 function demoPick() {
     // These are literal types, no instances
-    let pickNotification: Pick<Notification, "message" | "name">;
+    let pickNotification: Pick<MyNotification, "message" | "name">;
 
     // Now variable only accepts these properties, with their original types
     pickNotification = { name: "any", message: "any" };
